@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>This is a relatively random form</title>
+		<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
+    	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='dojos_styles.css') }}">
+	</head>
+	<body>
+		<div id="container">
+      <h1> This is a random form </h1>
+			<form id="contact">
+				<div id="name">
+					<p>First name: </p>
+					<input type="text" name="first_name">
+					<p>Last name: </p>
+					<input type="text" name="last_name">
+					<p>Description:</p>
+					<textarea placeholder="Enter Description:"></textarea>
+					<input type='submit' value='Add User'>
+				</div>
+			</form>
+			<div id="cards">
+			</div>
+		</div>
+	</body>
+</html>
