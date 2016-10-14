@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My First Weather App</title>
+    <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script>
+
+    //Initiates once page has loaded.
+    $(document).ready(function() {
+
+      // Executes function once submit button his clicked
+      $('form').submit(function() {
+
+        // Grabs the city submitted in the form by value id
+        var city = document.getElementById("city").value;
+
+        $.get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=097da3c5bf2bc150ff63d93badce9a3d", function(res) {
+          console.log("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=097da3c5bf2bc150ff63d93badce9a3d");
+
+          // Variables
+          var html_str = '';
+          // Converts received kelvin variable to farenheigt and limits to 1 decimal
+          var kelvin_to_f = ((res.main.temp * 9) / 5) - 459.67
+          kelvin_to_f = kelvin_to_f.toFixed(1);
+
+          // Building of our html_str variable
+          html_str += '<h1>'+ res.name + '</h1>';
+          html_str += '<p>Temperature: ' + kelvin_to_f + ' &#8457</p>';
+
+          // Posts variable html_str to data div
+          $('#data').html(html_str);
+        }, 'json');
+
+        // Won't reload page on submit
+        return false;
+    });
+});
+    </script>
+    <head>
+
+    </head>
+    <body>
+
+      <form>
+        <input type="text" id="city" name="city" />
+        <input type="submit" value="Search Weather" />
+        <div id="data">
+        </div>
+      </form>
+
+    </body>
+</html>
