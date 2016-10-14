@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Pokedex</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='index_styles.css') }}">
+    <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script>
+    $(document).ready(function(){
+      $('img').click(function(){
+
+          /* Sets the variable poke-check to whatever picture id is clicked */
+        var poke_check = $(this).attr('id');
+        console.log(poke_check);
+
+        $.get("http://pokeapi.co/api/v1/pokemon/" + poke_check, function(res){
+            console.log(res.name);
+
+            /* code to add name of pokemon and picture to html_str */
+          html_str = '';
+          html_str += "<h2>" + res.name + "</h2>";
+          html_str += " <img src=http://54.218.118.137/imgs/" + poke_check + " > ";
+
+            /* code to add types to html_str */
+          html_str += "<h4>Types</h4>";
+          html_str += "<ul>"
+          for(var i = 0; i<res.types.length; i++){
+            html_str += "<li>" + res.types[i].name + "</li>"};
+          html_str += "</ul>";
+
+            /* code to add height to html_str */
+          html_str += "<h4>Height</h4>"
+          html_str += "<p>" + res.height + "</p>"
+
+            /* code to add weight to html_str */
+          html_str += "<h4>Weight</h4>"
+          html_str += "<p>" + res.weight + "</p>"
+
+            /* code that adds html to pokedex div */
+            $('#pokedex').html(html_str);
+          }, "json");
+
+      });
+    });
+    </script>
+
+  </head>
+
+  <body>
+    <div id="container">
+
+      <div id="pokemon">
+        {% for pokemon_id in range(1, 152): %}
+          <img id="{{pokemon_id}}" src="http://54.218.118.137/imgs/{{pokemon_id}}" alt="{{pokemon_id}}">
+        {% endfor %}
+      </div>
+
+      <div id ="pokedex">
+      </div>
+    </div>
+  </body>
+
+</html>
